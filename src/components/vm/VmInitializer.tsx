@@ -40,6 +40,7 @@ export default function VmInitializer() {
   const [signedAccountId, setSignedAccountId] = useState(null);
   const [availableStorage, setAvailableStorage] = useState<Big | null>(null);
   const [walletModal, setWalletModal] = useState<WalletSelectorModal | null>(null);
+  const [walletModalReady, setWalletModalReady] = useState(false);
   const [useWalletSelector, setUseWalletSelector] = useState(false);
   const ethersProviderContext = useEthersProviderContext();
   const { initNear } = useInitNear();
@@ -121,6 +122,13 @@ export default function VmInitializer() {
     });
   }, [near]);
 
+  useEffect(() => {
+    if (!walletModal) {
+      return;
+    }
+    setWalletModalReady(true)
+  }, [walletModal]);
+
   const requestSignMessage = useCallback(
     async (message: string) => {
       if (!near) {
@@ -156,11 +164,15 @@ export default function VmInitializer() {
     [near],
   );
 
+  // okay gotta come back to this
   const requestSignInWithWallet = useCallback(() => {
-    saveCurrentUrl();
-    walletModal?.show();
-    return false;
-  }, [saveCurrentUrl, walletModal]);
+    if (walletModalReady) {
+      saveCurrentUrl();
+      walletModal?.show();
+      return false;
+    }
+  }, [saveCurrentUrl, walletModalReady, walletModal]);
+  // }, [saveCurrentUrl, walletModal]);
 
   const logOut = useCallback(async () => {
     if (!near) {
@@ -234,6 +246,7 @@ export default function VmInitializer() {
     near,
     useWalletSelector,
     walletModal,
+    walletModalReady,
   ]);
 
   useEffect(() => {
