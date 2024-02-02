@@ -14,6 +14,13 @@ const HomePage: NextPageWithLayout = () => {
   // const requestSignInWithWallet = useAuthStore((store) => store.requestSignInWithWallet);
   const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
 
+  const openNEARWalletSelector = () => {
+      if (walletModal && typeof walletModal.show === 'function') {
+          walletModal.show();
+      } else {
+          console.error('walletModal is not initialized :/');
+      }
+  }
 
   useEffect(() => {
     if (!signedIn) {
@@ -46,7 +53,7 @@ const HomePage: NextPageWithLayout = () => {
                           cursor: 'pointer',
                           boxShadow: '0 6px 8px rgba(0, 0, 0, 0.3)',
                           filter: 'brightness(83%)',
-                      }} onClick={() => walletModal.show()}>Login</button>
+                      }} onClick={() => openNEARWalletSelector()}>Login</button>
                   </>
               )}
               {/*      TODO: Create some delete key log-out functionality here.*/}
