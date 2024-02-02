@@ -15,6 +15,16 @@ const Container = styled.div`
 
 {/* apparently this component will not connect with Wallet Connect with closeTransport error on mainnet and testnet <SignInPage></SignInPage>*/}
 export default function BosMain() {
+    const authStore = useAuthStore();
+    const [modalIsReady, setModalIsReady] = useState(false);
+
+    useEffect(() => {
+        console.log('it is late');
+        if (authStore.walletModalReady) {
+            setModalIsReady(true)
+        }
+    }, [authStore.walletModalReady, authStore.walletModal, authStore.signedIn]);
+
     const signedIn = useAuthStore((store) => store.signedIn);
     const walletModal = useAuthStore((store) => store.walletModal);
     const walletModalReady = useAuthStore((store) => store.walletModalReady);
@@ -32,16 +42,16 @@ export default function BosMain() {
     //     console.log('walletModal is ready');
     // }, [walletModal]);
 
-    useEffect(() => {
-        console.log('walletModalReady says it\'s', walletModalReady);
+    // useEffect(() => {
+    //     console.log('walletModalReady says it\'s', walletModalReady);
+    //
+    //     // if (walletModalReady) {
+    //     //     setRealModal(walletModal)
+    //     // }
+    //
+    // }, [walletModal, walletModalReady]);
 
-        // if (walletModalReady) {
-        //     setRealModal(walletModal)
-        // }
-
-    }, [walletModal, walletModalReady]);
-
-    if (!walletModalReady) {
+    if (!modalIsReady) {
         return (<></>)
     } else {
         return (
