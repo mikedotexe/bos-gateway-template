@@ -19,37 +19,15 @@ export default function BosMain() {
     const [modalIsReady, setModalIsReady] = useState(false);
 
     useEffect(() => {
-        console.log('it is late');
         if (authStore.walletModalReady) {
             setModalIsReady(true)
         }
     }, [authStore.walletModalReady, authStore.walletModal, authStore.signedIn]);
 
+    // There might be another approach here, still figuring out how to use this…
     const signedIn = useAuthStore((store) => store.signedIn);
     const walletModal = useAuthStore((store) => store.walletModal);
     const walletModalReady = useAuthStore((store) => store.walletModalReady);
-
-    // interface Modal {
-    //     show: () => void;
-    // }
-
-// Then, ensure `realModal` is of type `Modal` or possibly `Modal | null` if it can be null.
-//     const realModal: Modal | null = useAuthStore((state) => state.walletModal);
-
-    // const [realModal, setRealModal] = useState();
-
-    // useEffect(() => {
-    //     console.log('walletModal is ready');
-    // }, [walletModal]);
-
-    // useEffect(() => {
-    //     console.log('walletModalReady says it\'s', walletModalReady);
-    //
-    //     // if (walletModalReady) {
-    //     //     setRealModal(walletModal)
-    //     // }
-    //
-    // }, [walletModal, walletModalReady]);
 
     if (!modalIsReady) {
         return (<></>)
