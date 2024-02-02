@@ -9,7 +9,7 @@ import BosMain from '@/components';
 
 const HomePage: NextPageWithLayout = () => {
   const signedIn = useAuthStore((store) => store.signedIn);
-  const walletModal = useAuthStore((store) => store.walletModal);
+  // const walletModal = useAuthStore((store) => store.walletModal);
   // const walletModal = useAuthStore((store) => store.requestSignInWithWallet);
   // the below didn't seem to work
   // const requestSignInWithWallet = useAuthStore((store) => store.requestSignInWithWallet);

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { VmComponent } from '@/components/vm/VmComponent';
 import Disclaimer from './Discalaymer';
-import SignInPage from "@/pages/signin";
+// import SignInPage from "@/pages/signin";
 import {useAuthStore} from "@/stores/auth";
 import {widget} from "@/utils/config";
 import {useEffect} from "react";
@@ -18,15 +18,6 @@ export default function BosMain() {
     const signedIn = useAuthStore((store) => store.signedIn);
     const walletModal = useAuthStore((store) => store.walletModal);
 
-    const openNEARWalletSelector = () => {
-        walletModal.show();
-        if (walletModal && typeof walletModal.show === 'function') {
-            walletModal.show();
-        } else {
-            console.error('walletModal is not initialized');
-        }
-    }
-
     useEffect(() => {
         if (walletModal && typeof walletModal.show === 'function') {
             // You can place here any logic that needs to run once walletModal is confirmed to be initialized.
@@ -35,6 +26,15 @@ export default function BosMain() {
         }
         console.log('walletModal is ready');
     }, [walletModal]);
+
+    const openNEARWalletSelector = () => {
+        walletModal.show();
+        // if (walletModal && typeof walletModal.show === 'function') {
+        //     walletModal.show();
+        // } else {
+        //     console.error('walletModal is not initialized');
+        // }
+    }
 
     return (
         <Container>
