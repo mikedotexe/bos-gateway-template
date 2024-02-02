@@ -45,7 +45,6 @@ export default function VmInitializer() {
   const { initNear } = useInitNear();
   const near = useNear();
   const account = useAccount();
-  console.log('aloha account', account);
   const cache = useCache();
   const accountId = account.accountId || null;
   const setAuthStore = useAuthStore((state) => state.set);
@@ -118,8 +117,6 @@ export default function VmInitializer() {
       return;
     }
     near.selector.then((selector: any) => {
-      console.log('aloha before calling setWalletModal. selector', selector);
-      console.log('aloha near.config.contractName', near.config.contractName);
       setWalletModal(setupModal(selector, { contractId: near.config.contractName }));
     });
   }, [near]);
