@@ -232,6 +232,7 @@ export default function VmInitializer() {
       signedIn,
       useWalletSelector,
       walletModal,
+      walletModalReady,
     });
   }, [
     account,

@@ -13,6 +13,7 @@ type AuthState = {
   vmNear: any;
   useWalletSelector: boolean,
   walletModal: any;
+  walletModalReady: boolean;
 };
 
 type AuthStore = AuthState & {
@@ -32,4 +33,5 @@ export const useAuthStore = create<AuthStore>((set) => ({
   vmNear: null,
   useWalletSelector: false,
   walletModal: null,
+  walletModalReady: false,
 }));
