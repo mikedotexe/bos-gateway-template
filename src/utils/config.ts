@@ -54,5 +54,7 @@ export const networks: Record<NetworkId, Network> = {
 };
 
 export const networkId: NetworkId = (process.env.NEXT_PUBLIC_NETWORK_ID as NetworkId) || 'testnet';
+export const walletConnectProjectId: string = (process.env.NEXT_NEXT_WALLET_CONNECT_PROJECT_ID as string);
+export const publicHostname: string = (process.env.NEXT_NEXT_WALLET_CONNECT_PROJECT_ID as string);
 export const network = networks[networkId];
 export const signInContractId = networkId === 'testnet' ? 'v1.social08.testnet' : 'social.near';

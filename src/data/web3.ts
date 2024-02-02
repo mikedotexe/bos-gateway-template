@@ -7,9 +7,23 @@ import { useEffect, useState } from 'react';
 import { singletonHook } from 'react-singleton-hook';
 
 import icon from '@/assets/images/near_social_icon.svg';
+// apparently we can't import these
+// import {publicHostname, walletConnectProjectId} from "@/utils/config";
 
 const web3onboardKey = 'web3-onboard:connectedWallets';
 
+// const wcV2InitOptions: any = {
+//   projectId: walletConnectProjectId,
+//   dappUrl: publicHostname,
+// };
+// console.log('aloha wcV2InitOptions', wcV2InitOptions)
+
+// const wcV2InitOptions: any = {
+//   projectId: '31e2eaaed3fbf6a6af0ecb7b17f59d84',
+//   dappUrl: "http://127.0.0.1:3001"
+// };
+
+// crap i don't think this will work
 const wcV2InitOptions: any = {
   projectId: 'ecc5180b7e97272ed41e03edd94d793d',
   dappUrl: "https://near.org"

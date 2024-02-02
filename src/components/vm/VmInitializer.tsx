@@ -2,15 +2,17 @@ import { sanitizeUrl } from '@braintree/sanitize-url';
 import { setupKeypom } from '@keypom/selector';
 import { setupWalletSelector } from '@near-wallet-selector/core';
 import { setupHereWallet } from '@near-wallet-selector/here-wallet';
-import { setupMeteorWallet } from '@near-wallet-selector/meteor-wallet';
+// todo: mj commented this out, but not sure if I should iterate and try with it
+// import { setupMeteorWallet } from '@near-wallet-selector/meteor-wallet';
+import { setupWalletConnect } from "@near-wallet-selector/wallet-connect";
 import type { WalletSelectorModal } from '@near-wallet-selector/modal-ui';
 import { setupModal } from '@near-wallet-selector/modal-ui';
 import { setupMyNearWallet } from '@near-wallet-selector/my-near-wallet';
 import { setupNearWallet } from '@near-wallet-selector/near-wallet';
-import { setupNeth } from '@near-wallet-selector/neth';
+// import { setupNeth } from '@near-wallet-selector/neth';
 import { setupNightly } from '@near-wallet-selector/nightly';
 import { setupSender } from '@near-wallet-selector/sender';
-import { setupWelldoneWallet } from '@near-wallet-selector/welldone-wallet';
+// import { setupWelldoneWallet } from '@near-wallet-selector/welldone-wallet';
 import Big from 'big.js';
 import { setupFastAuthWallet } from 'near-fastauth-wallet';
 import {
@@ -30,7 +32,7 @@ import { useEthersProviderContext } from '@/data/web3';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
 import { useVmStore } from '@/stores/vm';
-import { networkId, signInContractId } from '@/utils/config';
+import {networkId, signInContractId, walletConnectProjectId} from '@/utils/config';
 import { KEYPOM_OPTIONS } from '@/utils/keypom-options';
 
 export default function VmInitializer() {
@@ -38,12 +40,14 @@ export default function VmInitializer() {
   const [signedAccountId, setSignedAccountId] = useState(null);
   const [availableStorage, setAvailableStorage] = useState<Big | null>(null);
   const [walletModal, setWalletModal] = useState<WalletSelectorModal | null>(null);
+  const [useWalletSelector, setUseWalletSelector] = useState(false);
   const ethersProviderContext = useEthersProviderContext();
   const { initNear } = useInitNear();
   const near = useNear();
   const account = useAccount();
+  console.log('aloha account', account);
   const cache = useCache();
-  const accountId = account.accountId;
+  const accountId = account.accountId || null;
   const setAuthStore = useAuthStore((state) => state.set);
   const setVmStore = useVmStore((store) => store.set);
   const { requestAuthentication, saveCurrentUrl } = useSignInRedirect();
@@ -59,13 +63,25 @@ export default function VmInitializer() {
             setupMyNearWallet(),
             setupSender(),
             setupHereWallet(),
-            setupMeteorWallet(),
-            setupNeth({
-              gas: '300000000000000',
-              bundle: false,
+            setupWalletConnect({
+              // guess this is not loading either from config?
+              // projectId: walletConnectProjectId,
+              projectId: "6ac6fa888fb53661396636cc747245ad",
+              metadata: {
+                name: 'NEAR Staking',
+                description: 'Stake, unstake, withdraw NEAR',
+                url: 'http://127.0.0.1:3001', // todo
+                icons: ['https://avatars.githubusercontent.com/u/37784886'],
+              },
             }),
+              // todo here too mike
+            // setupMeteorWallet(),
+            // setupNeth({
+            //   gas: '300000000000000',
+            //   bundle: false,
+            // }),
             setupNightly(),
-            setupWelldoneWallet(),
+            // setupWelldoneWallet(),
             setupFastAuthWallet({
               relayerUrl:
                 networkId === 'testnet'
@@ -102,6 +118,8 @@ export default function VmInitializer() {
       return;
     }
     near.selector.then((selector: any) => {
+      console.log('aloha before calling setWalletModal. selector', selector);
+      console.log('aloha near.config.contractName', near.config.contractName);
       setWalletModal(setupModal(selector, { contractId: near.config.contractName }));
     });
   }, [near]);
@@ -170,6 +188,10 @@ export default function VmInitializer() {
       return;
     }
     setSignedIn(!!accountId);
+    // // todo set to true?
+    // setUseWalletSelector(
+    //     setupModal(selector, { contractId : NetworkId === "testnet" ? "v1.social08.testnet" : near.config.contractName })
+    // );
     setSignedAccountId(accountId);
   }, [near, accountId]);
 
@@ -199,6 +221,8 @@ export default function VmInitializer() {
       requestSignMessage,
       vmNear: near,
       signedIn,
+      useWalletSelector,
+      walletModal,
     });
   }, [
     account,
@@ -211,6 +235,8 @@ export default function VmInitializer() {
     signedAccountId,
     setAuthStore,
     near,
+    useWalletSelector,
+    walletModal,
   ]);
 
   useEffect(() => {
