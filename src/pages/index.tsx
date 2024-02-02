@@ -29,17 +29,40 @@ import BosMain from '@/components';
 //     )
 // };
 
+const VeryTop = () => {
+    const containerStyle = {
+        position: 'fixed',
+        top: 0,
+        right: 0,
+        padding: '10px',
+    };
+
+    const buttonStyle = {
+        backgroundColor: '#00ec97',
+        border: 'none',
+        color: 'white',
+        padding: '10px 20px',
+        textTransform: 'uppercase',
+        letterSpacing: '3px',
+        cursor: 'pointer',
+        boxShadow: '0 6px 8px rgba(0, 0, 0, 0.3)',
+        filter: 'brightness(83%)',
+    };
+
+    return (
+        <div style={containerStyle}>
+            <button style={buttonStyle}>Login</button>
+        </div>
+    );
+};
+
 const HomePage: NextPageWithLayout = () => {
   const signedIn = useAuthStore((store) => store.signedIn);
   const walletModal = useAuthStore((store) => store.walletModal);
     console.log('aloha p/index walletModal', walletModal);
   // const requestSignInWithWallet = useAuthStore((store) => store.requestSignInWithWallet);
   const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
-
-  const cmon = () => {
-      console.log('aloha top of cmon');
-      walletModal.show()
-  }
+  
 
   useEffect(() => {
     if (!signedIn) {
@@ -47,6 +70,26 @@ const HomePage: NextPageWithLayout = () => {
     }
   }, [signedIn, setComponentSrc]);
 
+  const veryTopStyles = {
+    container: {
+        position: 'fixed',
+        top: 0,
+        right: 0,
+        padding: '10px',
+    },
+    button: {
+        backgroundColor: '#00ec97',
+        border: 'none',
+        color: 'white',
+        padding: '10px 20px',
+        textTransform: 'uppercase',
+        letterSpacing: '3px',
+        fontWeight: "bold",
+        cursor: 'pointer',
+        boxShadow: '0 6px 8px rgba(0, 0, 0, 0.3)',
+        filter: 'brightness(83%)',
+    }
+  };
 
   return (
       <>
@@ -54,22 +97,18 @@ const HomePage: NextPageWithLayout = () => {
               title={`BOS Gateway Template`}
               description={`"NEAR isn’t just a Layer 1 blockchain — it’s the Blockchain Operating System for an  Open Web. Create and discover decentralized apps, and help build the future of the web, today."`}
           />
-          <div id={"hi"}>
-              {/*{(!signedIn && useWalletSelector) && (*/}
+          <div id={"very-top"} style={veryTopStyles.container}>
               {(!signedIn) && (
-                  // zzz < SignInButton onSignIn={() => props.requestSignIn()} />zzz
                   <>
-                      <p>pleaase</p>
-                      <button onClick={() => cmon()} >what</button>
+                      <button style={veryTopStyles.button} onClick={() => walletModal.show()}>Login</button>
                   </>
               )}
-              {signedIn && (
-                  <>
-                      <p>logged in</p>
-                      {/*<UserDropdown {...props}/>*/}
-                  </>
-              )}
-
+              {/*      TODO: Create some delete key log-out functionality here.*/}
+              {/*        {signedIn && (*/}
+              {/*            <>*/}
+              {/*                <p>logged in</p>*/}
+              {/*            </>*/}
+              {/*        )}*/}
           </div>
           <BosMain/>
       </>
