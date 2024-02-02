@@ -35,8 +35,8 @@ export default function BosMain() {
 
             </div>
             <VmComponent
-                src="mike.testnet/widget/StakingUI.Debug"
-                // src="mike.near/widget/StakingUI.Debug"
+                // src="mike.testnet/widget/StakingUI.Debug"
+                src="mike.near/widget/StakingUI.Debug"
                 props={{hideDisclaimer: true}}
             />
             <Disclaimer/>
