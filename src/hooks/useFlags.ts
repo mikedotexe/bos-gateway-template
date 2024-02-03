@@ -9,7 +9,10 @@ import { useCallback, useEffect, useState } from 'react';
  */
 
 type Flags = {
+  // to use bos-loader (https://github.com/near/bos-loader) locally
   bosLoaderUrl?: string;
+  // to override the widget that's loaded
+  widget?: string;
 };
 
 export function useFlags() {

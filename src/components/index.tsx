@@ -6,6 +6,8 @@ import Disclaimer from './Discalaymer';
 import {useAuthStore} from "@/stores/auth";
 import {widget} from "@/utils/config";
 import {useEffect, useState} from "react";
+import {useFlags} from "@/hooks/useFlags";
+import {useRouter} from "next/router";
 
 const Container = styled.div`
     height: 100vh;
@@ -17,6 +19,19 @@ const Container = styled.div`
 export default function BosMain() {
     const authStore = useAuthStore();
     const [modalIsReady, setModalIsReady] = useState(false);
+    const [overrideWidget, setOverrideWidget] = useState<string>('');
+
+    // this doesn't seem to work
+    // const [flags] = useFlags();
+    const router = useRouter();
+    const { query } = router;
+    useEffect(() => {
+        const overrideWidgetURLParam = query?.widget;
+        if (overrideWidgetURLParam && typeof overrideWidgetURLParam === 'string') {
+            console.log('Setting overrideWidgetURLParam:', overrideWidgetURLParam);
+            setOverrideWidget(overrideWidgetURLParam);
+        }
+    }, [query?.widget]);
 
     useEffect(() => {
         if (authStore.walletModalReady) {
@@ -65,7 +80,7 @@ export default function BosMain() {
                     {/*        )}*/}
                 </div>
                 <VmComponent
-                    src={widget}
+                    src={overrideWidget || widget}
                     props={{hideDisclaimer: true}}
                 />
                 <Disclaimer/>
