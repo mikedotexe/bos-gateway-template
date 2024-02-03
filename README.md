@@ -100,3 +100,10 @@ More info [here](https://tauri.app/v1/guides/distribution/sign-macos).
 
 Run this action to publish the release files to GitHub:
 [```.github/workflows/publish.yml```](https://github.com/NearDeFi/bos-gateway-template/blob/main/.github/workflows/publish.yml)
+
+### Additional notes
+
+You may add a URL parameter on the end in order to utilize [`bos-loader`](https://github.com/near/bos-loader) for development. There are two ways to do this:
+
+1. `http://localhost:3000/?bosLoaderUrl=http://127.0.0.1:3030` — to be explicit
+2. `http://localhost:3000/?local` — to use the default (http://127.0.0.1:3030)
