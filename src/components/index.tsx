@@ -10,10 +10,13 @@ import {useFlags} from "@/hooks/useFlags";
 import {useRouter} from "next/router";
 
 const Container = styled.div`
-    height: 100vh;
+    height: 150vh;
     padding: 1rem;
+    background-image: radial-gradient(circle, transparent 10%, black 83%),
+                      radial-gradient(circle, transparent 10%, slategray 50%, transparent 66%);
+    background-color: slategray;
+    background-attachment: fixed;
 `;
-
 
 {/* apparently this component will not connect with Wallet Connect with closeTransport error on mainnet and testnet <SignInPage></SignInPage>*/}
 export default function BosMain() {
@@ -42,7 +45,6 @@ export default function BosMain() {
     // There might be another approach here, still figuring out how to use this…
     const signedIn = useAuthStore((store) => store.signedIn);
     const walletModal = useAuthStore((store) => store.walletModal);
-    const walletModalReady = useAuthStore((store) => store.walletModalReady);
 
     if (!modalIsReady) {
         return (<></>)

@@ -48,7 +48,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <>
       <Head>
-        <meta name="google-site-verification" content="CDEVFlJTyVZ2vM7ePugKgWsl_7Rd-MrfDv42u0vZ0B0" />
+        <meta name="" content="" />
         <link rel="icon" href="favicon.ico" />
       </Head>
 
