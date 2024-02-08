@@ -54,7 +54,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     <>
       <Head>
         <meta name="" content="" />
-        <link rel="icon" href="favicon.ico" />
+        <link rel="icon" href="favicon.png" />
       </Head>
 
       <Script id="bootstrap" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" />
