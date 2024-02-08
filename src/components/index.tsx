@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 
-import { VmComponent } from '@/components/vm/VmComponent';
 import Disclaimer from './Discalaymer';
 // import SignInPage from "@/pages/signin";
 import {useAuthStore} from "@/stores/auth";
 import {widget} from "@/utils/config";
 import {useEffect, useState} from "react";
-import {useFlags} from "@/hooks/useFlags";
 import {useRouter} from "next/router";
+import dynamic from "next/dynamic";
+
+const VmComponent = dynamic(() => import('../components/vm/VmComponent'), {});
 
 const Container = styled.div`
     height: 150vh;
@@ -19,13 +20,11 @@ const Container = styled.div`
 `;
 
 {/* apparently this component will not connect with Wallet Connect with closeTransport error on mainnet and testnet <SignInPage></SignInPage>*/}
-export default function BosMain() {
+export default function BosMain(props: Record<string, unknown>) {
     const authStore = useAuthStore();
     const [modalIsReady, setModalIsReady] = useState(false);
     const [overrideWidget, setOverrideWidget] = useState<string>('');
 
-    // this doesn't seem to work
-    // const [flags] = useFlags();
     const router = useRouter();
     const { query } = router;
     useEffect(() => {
@@ -83,7 +82,7 @@ export default function BosMain() {
                 </div>
                 <VmComponent
                     src={overrideWidget || widget}
-                    props={{hideDisclaimer: true}}
+                    props={{...props}}
                 />
                 <Disclaimer/>
             </Container>

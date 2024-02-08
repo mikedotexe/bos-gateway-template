@@ -22,6 +22,7 @@ html {
   -webkit-font-smoothing: antialiased;
   color: var(--sand12);
   font: var(--text-base);
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 a {
@@ -63,4 +64,18 @@ a:hover {
     right: 2px;
     bottom: 10px;
   }
+}
+
+.white-scrollbar::-webkit-scrollbar {
+  width: 12px;
+}
+
+.white-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.white-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #f2f1e9;
+  border-radius: 20px;
+  border: 3px solid black;
 }

@@ -8,7 +8,7 @@ type Props = {
   props?: Record<string, unknown>;
 };
 
-export function VmComponent(props: Props) {
+export default function VmComponent(props: Props) {
   const { EthersProvider, ethersContext, Widget } = useVmStore();
   const redirectMapStore = useBosLoaderStore();
 

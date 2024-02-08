@@ -1,12 +1,13 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
-import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import type { NextPageWithLayout } from '@/utils/types';
+import {ErrorLoaderBanner} from "@/components/ErrorBanner";
+import dynamic from "next/dynamic";
+const VmComponent = dynamic(() => import('../../../components/vm/VmComponent'), {});
 
 const ViewComponentPage: NextPageWithLayout = () => {
   const router = useRouter();
@@ -49,6 +50,13 @@ const ViewComponentPage: NextPageWithLayout = () => {
   );
 };
 
-ViewComponentPage.getLayout = useDefaultLayout;
+ViewComponentPage.getLayout = function getLayout(page) {
+    return (
+        <>
+            {page.props.error.msg && <ErrorLoaderBanner errorInfo={page.props.error.msg} />}
+            {page}
+        </>
+    );
+};
 
 export default ViewComponentPage;

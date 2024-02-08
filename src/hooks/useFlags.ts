@@ -43,7 +43,6 @@ export function useFlags() {
         flags = { ...flags, ...whatThatMeans };
         setRawFlags(flags);
     }
-
   }, []);
 
 

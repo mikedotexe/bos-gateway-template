@@ -1,12 +1,13 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
-import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useSimpleLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import type { NextPageWithLayout } from '@/utils/types';
+import dynamic from "next/dynamic";
+const VmComponent = dynamic(() => import('../../../../components/vm/VmComponent'), {});
 
 const EmbedComponentPage: NextPageWithLayout = () => {
   const router = useRouter();
