@@ -279,7 +279,7 @@ export const useEthersProviderContext = singletonHook(defaultEthersProviderConte
         // You can also auto connect "silently" and disable all onboard modals to avoid them flashing on page load
         await onboard.connectWallet({
           autoSelect: {
-            label: previouslyConnectedWallets[0],
+            label: previouslyConnectedWallets[0] || "Not connected",
             disableModals: true,
           },
         });

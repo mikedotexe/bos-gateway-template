@@ -53,8 +53,8 @@ const HomePage: NextPageWithLayout = (homepageProps) => {
   return (
       <>
           <MetaTags
-              title={`Staking NEAR`}
-              description={`"Stake, unstake, withdraw NEAR using verifiable frontend component code."`}
+              title={`Chain Signatures — NEAR Protocol`}
+              description={`"Demonstration of chain signatures allowing a user with a NEAR account to interact with other blockchains using a multi-party computation relayer system."`}
           />
           <BosMain {...homepageProps} routeDetails={{...routeDetails}} urlParams={{...urlParams}}/>
       </>

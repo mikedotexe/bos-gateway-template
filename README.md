@@ -107,3 +107,8 @@ You may add a URL parameter on the end in order to utilize [`bos-loader`](https:
 
 1. `http://localhost:3000/?bosLoaderUrl=http://127.0.0.1:3030` — to be explicit
 2. `http://localhost:3000/?local` — to use the default (http://127.0.0.1:3030)
+
+Remember that Tauri would like static exports:
+https://tauri.app/v1/guides/getting-started/setup/next-js/#nextjs-static-exports
+
+"near-social-vm": "github:NearSocial/VM#2.6.0",

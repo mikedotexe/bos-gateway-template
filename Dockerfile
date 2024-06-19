@@ -10,7 +10,8 @@ RUN apk add --no-cache curl \
 WORKDIR /app
 
 # Clone the repository
-RUN git clone https://github.com/NearDeFi/bos-gateway-template.git .
+RUN #git clone https://github.com/NearDeFi/bos-gateway-template.git .
+RUN git clone --branch 2.5.6 https://github.com/NearSocial/VM.git .
 
 # copy .env.example to .env
 RUN cp .env.example .env
@@ -19,7 +20,7 @@ RUN cp .env.example .env
 RUN pnpm install
 
 # Build the app
-RUN pnpm run build
+RUN pnpm run build:next
 
 # Make port 3000 available to the world outside this container
 EXPOSE 3000

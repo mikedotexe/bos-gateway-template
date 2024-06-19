@@ -79,3 +79,11 @@ a:hover {
   border-radius: 20px;
   border: 3px solid black;
 }
+
+/* didn't work */
+/*.external-link::after {*/
+/*  content: url(data:image/svg+xml;charset=utf-8,%3Csvg fill='%235f8afaff' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21 13v10H0V4h12v2H2v15h17v-8h2zm3-12H13.012l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07L24 12V1z'/%3E%3C/svg%3E);*/
+/*  display: inline-block;*/
+/*  margin-left: 0.3rem;*/
+/*  width: 0.6rem;*/
+/*}*/
